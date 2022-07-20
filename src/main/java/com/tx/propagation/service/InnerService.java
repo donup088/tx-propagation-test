@@ -15,10 +15,15 @@ public class InnerService {
     private final TestObjectRepository testObjectRepository;
 
     @Transactional
+//    @Transactional(propagation = Propagation.REQUIRED) //부모 트랜잭션이 있으면 합류한다.
+//    @Transactional(propagation = Propagation.REQUIRES_NEW) //부모 트랜잭션 상관없이 무조건 새로운 트랜잭션을 생성한다.
+//    @Transactional(propagation = Propagation.MANDATORY) //부모 트랜잭션에 합류한다. 부모 트랜잭션이 없다면 예외가 발생한다.
+//    @Transactional(propagation = Propagation.NEVER) //트랜잭션을 생성하지 않는다. 부모 트랜잭션이 있다면 예외가 발생한다.
+//    @Transactional(propagation = Propagation.SUPPORTS) //부모 트랜잭션에 합류한다. 진행중인 부모 트랜잭션이 없다면 새로운 트랜잭션을 생성하지 않는다.
     public void logic() {
         log.info("currentTransactionName : {}",
                 TransactionSynchronizationManager.getCurrentTransactionName());
         testObjectRepository.save(new TestObject("자식"));
-        throw new RuntimeException();
+//        throw new RuntimeException();
     }
 }

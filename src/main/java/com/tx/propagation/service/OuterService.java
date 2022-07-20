@@ -19,11 +19,14 @@ public class OuterService {
     public void txTest() {
         log.info("currentTransactionName : {}",
                 TransactionSynchronizationManager.getCurrentTransactionName());
-        try {
-            repository.save(new TestObject("부모"));
-            innerService.logic();
-        } catch (RuntimeException e) {
-            log.info(e.getMessage());
-        }
+//        try {
+//            repository.save(new TestObject("부모"));
+//            innerService.logic();
+//        } catch (RuntimeException e) {
+//            log.info(e.getMessage());
+//        }
+
+        repository.save(new TestObject("부모"));
+        innerService.logic();
     }
 }
